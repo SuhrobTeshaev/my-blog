@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "ABCReproVariable";
+  src: url("/fonts/ABCReproVariable.woff2") format("woff2"),
+       url("/fonts/ABCReproVariable.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #000;
+  background-image: url('../assets/i.webp');
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Сброс для body и html */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 16px; /* стандартный размер шрифта */
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+/* Удаление отступов и дефолтных стилей у всех элементов */
+*, *::before, *::after {
+  box-sizing: border-box;
+   font-family: "ABCReproVariable", Arial, sans-serif;
+}
+
+/* Стилизация ссылок */
+a {
+  text-decoration: none;
+  color: inherit; /* унаследовать цвет от родителя */
+}
+
+/* Стилизация всех заголовков */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: inherit;
+}
+
+/* Пример для параграфов */
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Базовые стили для списков */
+ul, ol {
+  padding-left: 1.25em;
+  margin: 0;
+  list-style-position: inside;
+}
+
+/* Установка основного фона для сайта */
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+}

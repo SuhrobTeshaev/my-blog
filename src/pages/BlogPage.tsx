@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   useGetPostsQuery,
-  useGetPhotosQuery,
+//   useGetPhotosQuery,
   Post,
 } from "../features/blogsApi";
 import BlogList from "../components/BlogList";
@@ -12,7 +12,7 @@ import PostModal from "../components/Modal";
 
 const BlogPage: React.FC = () => {
   const { data: posts = [], isLoading } = useGetPostsQuery();
-  const { data: photos = [] } = useGetPhotosQuery();
+//   const { data: photos = [] } = useGetPhotosQuery();
 
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);

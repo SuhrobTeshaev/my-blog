@@ -9,6 +9,7 @@ import FilterBar from "../components/FilterBar";
 import { Box, Skeleton, Typography } from "@mui/material";
 import PaginationBar from "../components/Pagination";
 import PostModal from "../components/Modal";
+import debounce from "lodash.debounce";
 
 type Tag = "Technology" | "Health" | "Food" | "Sport" | "Politics" | "Business";
 
@@ -138,14 +139,15 @@ const BlogPage: React.FC = () => {
     setSelectedTags(tags);
   };
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setFilteredPosts(
-      postsWithTags.filter((post) =>
-        post.title.toLowerCase().includes(query.toLowerCase()),
-      ),
-    );
-  };
+const handleSearch = debounce((query: string) => {
+  const normalizedQuery = query.trim().toLowerCase();
+  setSearchQuery(normalizedQuery);
+  setFilteredPosts(
+    postsWithTags.filter((post) =>
+      post.title.toLowerCase().includes(normalizedQuery)
+    )
+  );
+}, 500);
 
   const handlePageChange = (newPage: number) => setPage(newPage);
 

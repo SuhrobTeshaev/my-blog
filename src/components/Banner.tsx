@@ -15,7 +15,7 @@ const Banner: React.FC = () => {
       }}
     >
       <Typography variant="h3" sx={{ fontWeight: "bold", mb: 2 }}>
-        <span className="tesxt-orange-400">BlogPosts</span> - Ваши лучшие статьи
+        BlogPosts - Ваши лучшие статьи
       </Typography>
       <Typography variant="subtitle1">
         Добро пожаловать! Здесь вы найдете интересные статьи на разные темы.

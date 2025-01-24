@@ -10,6 +10,7 @@ import { Box, Skeleton, Typography } from "@mui/material";
 import PaginationBar from "../components/Pagination";
 import PostModal from "../components/Modal";
 import debounce from "lodash.debounce";
+import Banner from "../components/Banner";
 
 type Tag = "Technology" | "Health" | "Food" | "Sport" | "Politics" | "Business";
 
@@ -155,6 +156,7 @@ const handleSearch = debounce((query: string) => {
 
   return (
     <Box sx={{ padding: "0 20px", maxWidth: "1400px", margin: "0 auto" }}>
+      <Banner />
       <FilterBar onSearch={handleSearch} onTagFilter={handleTagFilter} />
       {isError && (
         <Typography color="error" variant="h6">
@@ -183,7 +185,7 @@ const handleSearch = debounce((query: string) => {
           <BlogList
             posts={filteredPosts.slice(
               (page - 1) * itemsPerPage,
-              page * itemsPerPage,
+              page * itemsPerPage
             )}
             onPostClick={(post) => setSelectedPost(post)}
             isLoading={isLoading}

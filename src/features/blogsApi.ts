@@ -1,24 +1,40 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Post {
-    id: number;
-    title: string;
-    body: string;
-    thumbnail: string;
-    tags: string[];
+  author: string;
+  id: number;
+  title: string;
+  body: string;
+  thumbnail: string;
+  tags: string[];
+  date: string;
+}
+export interface Photo {
+  id: number;
+  photographer: string;
+  src: {
+    original: string;
+    medium: string;
+    small: string;
+  };
+  alt: string;
 }
 
 export const blogsApi = createApi({
-    reducerPath: 'blogsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
-    endpoints: (builder) => ({
-        getPosts: builder.query<Post[], void>({
-            query: () => 'posts',
-        }),
-        getPhotos: builder.query<{ id: number; thumbnailUrl: string }[], void>({
-            query: () => 'photos',
-        }),
+  reducerPath: "blogsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://jsonplaceholder.typicode.com/",
+    prepareHeaders: (headers) => {
+      headers.set("Content-Type", "application/json");
+      return headers;
+    },
+  }),
+
+  endpoints: (builder) => ({
+    getPosts: builder.query<Post[], void>({
+      query: () => "posts",
     }),
+  }),
 });
 
-export const { useGetPostsQuery, useGetPhotosQuery } = blogsApi;
+export const { useGetPostsQuery } = blogsApi;

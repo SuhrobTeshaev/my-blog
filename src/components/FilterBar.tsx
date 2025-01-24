@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { TextField, Chip, Box } from "@mui/material";
+import { TextField, Chip, Box, InputAdornment } from "@mui/material";
 import debounce from "lodash.debounce";
+import SearchIcon from "@mui/icons-material/Search";
 
 interface FilterBarProps {
   onSearch: (query: string) => void;
@@ -10,15 +11,13 @@ interface FilterBarProps {
 const FilterBar: React.FC<FilterBarProps> = ({ onSearch, onTagFilter }) => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  
+  const debouncedSearch = debounce((query: string) => {
+    onSearch(query);
+  }, 500);
 
-   const debouncedSearch = debounce((query: string) => {
-     onSearch(query);
-   }, 500); // 500ms задержка
-
-   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-     debouncedSearch(event.target.value); // Вызываем debounced функцию
-   };
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(event.target.value);
+  };
 
   const handleTagClick = (tag: string) => {
     const updatedTags = selectedTags.includes(tag)
@@ -29,7 +28,13 @@ const FilterBar: React.FC<FilterBarProps> = ({ onSearch, onTagFilter }) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap={2} p={2}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      sx={{ padding: "20px 60px" }}
+      gap={2}
+      p={2}
+    >
       <TextField
         sx={{
           borderRadius: "20px",
@@ -43,9 +48,16 @@ const FilterBar: React.FC<FilterBarProps> = ({ onSearch, onTagFilter }) => {
         placeholder="Search by name"
         variant="outlined"
         onChange={handleSearch}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="end">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
       />
       <Box display="flex" gap={1} flexWrap="wrap">
-        {["tech", "health", "food", "sport", "politics", "business"].map(
+        {["Technology", "Health", "Food", "Sport", "Politics", "Business"].map(
           (tag) => (
             <Chip
               key={tag}
@@ -53,9 +65,10 @@ const FilterBar: React.FC<FilterBarProps> = ({ onSearch, onTagFilter }) => {
               color={selectedTags.includes(tag) ? "primary" : "default"}
               onClick={() => handleTagClick(tag)}
               sx={{
+                padding: "8px 12px",
                 backgroundColor: selectedTags.includes(tag)
                   ? "#11a850"
-                  : "#d3d3d3",
+                  : "#4B6BFB0D",
                 "&:hover": {
                   backgroundColor: "#11a850",
                   color: "white",
@@ -68,7 +81,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ onSearch, onTagFilter }) => {
                 },
               }}
             />
-          )
+          ),
         )}
       </Box>
     </Box>
